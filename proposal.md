@@ -1,12 +1,12 @@
 # Machine Learning Engineer Nanodegree  
 ## Capstone Proposal
 Masaharu KINOSHITA  
-email: <k.masaharu0219@gmail.com>  
-SNS: [LinkedIn](https://www.linkedin.com/in/masaharu-kinoshita/)  
+e-mail: <k.masaharu0219@gmail.com>  
+LinkedIn: [masaharu kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/) *prefer  
 Apr, 2019  
 
 ### Abstract
-In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle. As you know, CNN is mainly used in the field of Image Recognition. CNN, however, is said that it has a potential to solve time-series forecasting problem. In order to show that, CNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.
+In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle. As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. In order to show that, CNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.
 
 ### Agenda
 1. Domain background
@@ -70,3 +70,9 @@ Therefore, MSE is employed as evaluation metrics.
 ### Project Design
 In this final section, a workflow for approaching a solution is summarized. In order to verify the useful of CNN in the stock price prediction problem, the 4 models of RNN, CNN, LSTM, and CNN+LSTM are build on the train and test dataset with metrics MSE. Google stock datasets on [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs) are used. RNN, a benchmark model, and the other models are build on the train datasets from 2014-03-27 to 2017-05-01. After training, their MSE score on the test dataset, from 2017-05-01 to 2017-11-10, are compared with the others.  
 By doing so, how useful CNN is to time-series forecasting are verified.
+
+### EoF  
+Thanks for your reading. If you are interested in me, please feel free to txt me. I prefer LinkedIn to e-mail communication.
+e-mail: <k.masaharu0219@gmail.com>  
+LinkedIn: [masaharu kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/)  
+Sincerely,
