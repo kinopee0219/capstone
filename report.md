@@ -19,12 +19,12 @@ project specifications: [review points](https://review.udacity.com/#!/rubrics/10
 ### 1-1. Project Overview:
 In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle. As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. In order to show that RNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.  
 
-### 1-2. Problem Statement: 
+### 1-2. Problem Statement:
 In this proposal, usability of deep learning, especially CNN as an feature extractor, is verified. Although CNN is known to be valid in the field of Image Recognition, few use-case of CNN are applied to finance problem, such as stock price predictions. This is because a lot of Algorithm Trading has employed technical index so far. These index, however, are commonly used and developed by humans. So, it can be said that there is some room to improve Trading Algorithm.  
 In this context, applying CNN to the finance problem and validation of its usefulness is meaningful as CNN has high potential to recognize patterns in given dataset and computational power has advanced so far.  
 In order to valid the usefulness of LSTM and CNN+LSTM are compared to the stock price predictions with metrics MSE. In addition to this, RNN is set as base-models. By comparing the four models with MSE, the usefulness of CNN are verified in the stock price problem.  
 
-### 1-3. Metrics: 
+### 1-3. Metrics:
 As mentioned above, MSE is evaluation metrics. Needless to say, less MSE is better for stock price prediction. The reasons of employing MSE in this problem are the followings.  
 First, the target value, which is daily close stock price, is continuous. So, this is regression problem.  
 Second, more penalty is added to larger error with MSE compared to MAE by employing squared value.  
@@ -89,7 +89,7 @@ print('Test datasets: ', df_test.shape)
 y_train, y_test = df_train['Close'], df_test['Close']
 X_train, X_test = df_train.drop('Close', axis=1), df_test.drop('Close', axis=1)
 
-## data types of datasets: 
+## data types of datasets:
 print('---'*25)
 print('dtypes of datasets: ')
 print(df_train.info())
@@ -110,7 +110,7 @@ print(X_train.describe())
     Train datasets:  (780, 5)
     Test datasets:  (137, 5)
     ---------------------------------------------------------------------------
-    dtypes of datasets: 
+    dtypes of datasets:
     <class 'pandas.core.frame.DataFrame'>
     DatetimeIndex: 780 entries, 2014-03-27 to 2017-05-01
     Data columns (total 5 columns):
@@ -206,7 +206,7 @@ print(X_train.describe())
 </div>
 
 
-    Test datasets: 
+    Test datasets:
 
 
 
@@ -290,7 +290,7 @@ print(X_train.describe())
 
 
     ---------------------------------------------------------------------------
-    basic statistic of datasets: 
+    basic statistic of datasets:
                  Open        High         Low        Volume
     count  780.000000  780.000000  780.000000  7.800000e+02
     mean   659.798927  664.838887  654.095332  1.762739e+06
@@ -303,7 +303,7 @@ print(X_train.describe())
 
 
 ### 2-2. Exploratory Visualization
-In this section, the Close Price of train and test datasets, which is target value, are visualized. As shown below, the Close price of google are increasing from 2014-03-27 to 2017-11-10. 
+In this section, the Close Price of train and test datasets, which is target value, are visualized. As shown below, the Close price of google are increasing from 2014-03-27 to 2017-11-10.
 
 
 ```python
@@ -321,11 +321,11 @@ plt.show()
 ```
 
 
-![png](output_8_0.png)
+![png](./img/output_8_0.png)
 
 
 ### 2-3. Algorithms and Techniques
-In this paper, deep learning models performing well for time-series predictions, RNN, LSTM, CNN+LSTM, are used because the Close Price are relevant with the past stock information, which is our input data such as Open, High, Low, Volume columns. By applying RNN, LSTM, CNN+LSTM models to this time-series forecasting problem, how useful CNN is to solve time-series prediction problem is verified. 
+In this paper, deep learning models performing well for time-series predictions, RNN, LSTM, CNN+LSTM, are used because the Close Price are relevant with the past stock information, which is our input data such as Open, High, Low, Volume columns. By applying RNN, LSTM, CNN+LSTM models to this time-series forecasting problem, how useful CNN is to solve time-series prediction problem is verified.
 
 ### 2-4. Benchmark
 In this problem, RNN model is build to get base MSE as benchmark model. RNN, one of the famous deep learning models, is often used for time-series forecasting. This is an usual score with conventional method employing deep learning. As mentioned above, the metrics with which the benchmark model is measured is also MSE.
@@ -335,7 +335,7 @@ In this problem, RNN model is build to get base MSE as benchmark model. RNN, one
 ### 3-1. Data Preprocessing
 In this section, preprocessing datasets, especially normalization, is explained. In this problem, the datasets are normalized within window datasets.  
 More concretely speaking, window datasets values are devided by the value of its first index, 0. After do that, the values devided are minus 1 in order to set the value range from -1.0 to 1.0. This noramlization allows my deep learning models to learn more first and get properly regularization term effect. Actually, in this paper, no regularization approch are employed because this don't meet my goal which is to verify CNN potential for time-series forecasting.  
-In this time, 10 is employed for the window length. 
+In this time, 10 is employed for the window length.
 
 
 ```python
@@ -374,7 +374,7 @@ print('y_train shape: ', y_train_fin.shape)
 
 ### 3-2. Implementation
 The process for which metrics, algorithms, and techniques were implemented with the given datasets or input data has been thoroughly documented.  
-As for metics, MSE are employed in order to give more penalty on larger error compared to MAE because it is squared value. 
+As for metics, MSE are employed in order to give more penalty on larger error compared to MAE because it is squared value.
 
 As for algorithms and techniques, deep learning models are selected to perform well on this time-series problem. As mentioned above, RNN is employed as benchmark model. It is widely used for time-series prediction problem. According the convention, deep learning model with 7 layers which are composed of 6 RNN layers and 1 Dence is epmployed as benchmark model and trained on those datasets.  
 
@@ -390,7 +390,7 @@ Lastly, 1-dimentional-CNN+LSTM is employed as the third deep learning model to p
 
 On top of that, recurrent dropout are employed especially for 1d-CNN+LSTM to acquire generalization performance. In this technique, it is well known that the popular dropout rate is set up at 50%. It may be good. In this paper, however, some knowledge obtained from my data scientist friends who is kaggler are employed for the strategy of setting dropout rate. What he said is that it is better to decrease the dropout rate with increasing layers because deep learning model is getting more abstract representation and it is needless to set 50%. Actually, this is rule of thumb, but it is valuable to try this technique to build deep learning model by myself.  
 
-As a result, 1d-CNN+LSTM realize perform as well as LSTM and better than benchmark model, RNN. In addition to this, the learning time of 1d-CNN+LSTM model is the shortest amongst the three models. 
+As a result, 1d-CNN+LSTM realize perform as well as LSTM and better than benchmark model, RNN. In addition to this, the learning time of 1d-CNN+LSTM model is the shortest amongst the three models.
 
 
 ```python
@@ -403,7 +403,7 @@ step_size = 10
 input_size = 4
 num_epochs = 40
 
-## benchmark model; RNN 
+## benchmark model; RNN
 def build_rnn(input_shape=(step_size, input_size), loss='mean_squared_error', optimizer='adam'):
     model = Sequential()
     model.add(SimpleRNN(16, input_shape=(step_size, input_size), return_sequences=True))
@@ -472,7 +472,7 @@ cnn_lstm = build_cnn_lstm(input_shape=(step_size, input_size))
 ```
 
     ---------------------------------------------------------------------------
-    rnn architecture: 
+    rnn architecture:
     _________________________________________________________________
     Layer (type)                 Output Shape              Param #   
     =================================================================
@@ -495,10 +495,10 @@ cnn_lstm = build_cnn_lstm(input_shape=(step_size, input_size))
     Non-trainable params: 0
     _________________________________________________________________
     None
-    
-    
+
+
     ---------------------------------------------------------------------------
-    lstm architecture: 
+    lstm architecture:
     _________________________________________________________________
     Layer (type)                 Output Shape              Param #   
     =================================================================
@@ -521,10 +521,10 @@ cnn_lstm = build_cnn_lstm(input_shape=(step_size, input_size))
     Non-trainable params: 0
     _________________________________________________________________
     None
-    
-    
+
+
     ---------------------------------------------------------------------------
-    cnn+lstm architecture: 
+    cnn+lstm architecture:
     _________________________________________________________________
     Layer (type)                 Output Shape              Param #   
     =================================================================
@@ -551,13 +551,13 @@ cnn_lstm = build_cnn_lstm(input_shape=(step_size, input_size))
     Non-trainable params: 0
     _________________________________________________________________
     None
-    
-    
+
+
 
 
 
 ```python
-# deep learning models training: 
+# deep learning models training:
 ## RNN trianing:
 print('RNN training...')
 start = time.time()
@@ -665,8 +665,8 @@ print ("elapsed_time:{0}".format(elapsed_time_cnn_lstm) + "[sec]")
     Epoch 40/40
     770/770 [==============================] - 1s 1ms/step - loss: 0.0015 - mean_absolute_error: 0.0284 - val_loss: 0.0026 - val_mean_absolute_error: 0.0363
     elapsed_time:139.41530799865723[sec]
-    
-    
+
+
     LSTM training...
     Train on 770 samples, validate on 127 samples
     Epoch 1/40
@@ -750,8 +750,8 @@ print ("elapsed_time:{0}".format(elapsed_time_cnn_lstm) + "[sec]")
     Epoch 40/40
     770/770 [==============================] - 3s 3ms/step - loss: 5.0619e-04 - mean_absolute_error: 0.0162 - val_loss: 2.4449e-04 - val_mean_absolute_error: 0.0127
     elapsed_time:196.04686617851257[sec]
-    
-    
+
+
     CNN+LSTM training...
     Train on 770 samples, validate on 127 samples
     Epoch 1/40
@@ -878,7 +878,7 @@ for key, hist_value in history_dict.items():
 
 
 
-![png](output_16_1.png)
+![png](./img/output_16_1.png)
 
 
     Minimum val MSE: 0.00171
@@ -888,7 +888,7 @@ for key, hist_value in history_dict.items():
 
 
 
-![png](output_16_3.png)
+![png](./img/output_16_3.png)
 
 
     Minimum val MSE: 0.00024
@@ -898,7 +898,7 @@ for key, hist_value in history_dict.items():
 
 
 
-![png](output_16_5.png)
+![png](./img/output_16_5.png)
 
 
     Minimum val MSE: 0.00024
@@ -913,7 +913,7 @@ In this section, the final model's qualities such as its robustness are evaluate
 
 As shown in the above learning curves, the three models has generalized perfomance because they perform well on both train and test datasets in terms of MSE, which is metrics.  
 
-In addition to this, the parameter's value of each model is respectively visualized in the below distribution plots. The distribution graphs show that parametes value of network distribute from -0.5 to 0.5 although bias values distribute mostly aroung 0. This means that the deep learning models are a little bit redundancy network to solve this problem. 
+In addition to this, the parameter's value of each model is respectively visualized in the below distribution plots. The distribution graphs show that parametes value of network distribute from -0.5 to 0.5 although bias values distribute mostly aroung 0. This means that the deep learning models are a little bit redundancy network to solve this problem.
 
 ### 4-2. Justification
 In this sectioin, the final results are compared to the benchmark result and justification is made as to whether the final model and solution is significant enough to have adequately solved the problem.  
@@ -966,21 +966,21 @@ plt.show()
 
 
 
-![png](output_18_1.png)
+![png](./img/output_18_1.png)
 
 
     LSTM
 
 
 
-![png](output_18_3.png)
+![png](./img/output_18_3.png)
 
 
     CNN+LSTM
 
 
 
-![png](output_18_5.png)
+![png](./img/output_18_5.png)
 
 
 ---
@@ -994,7 +994,7 @@ Predictions by each deep learning models are visualized below. As shown below an
 
 As for learning time, CNN+LSTM model saves the most amongst the three model. This is because CNN can learn parallely in contrast to LSTM which  learns sequentially.  
 
-In conclusion, employing CNN for time-series problem is valid in terms of prediction and learning speed compared to other deep learning models such as RNN and LSTM. 
+In conclusion, employing CNN for time-series problem is valid in terms of prediction and learning speed compared to other deep learning models such as RNN and LSTM.
 
 ||RNN  |LSTM  |CNN+LSTM  |
 |---|---|---|---|
@@ -1042,15 +1042,15 @@ plt.show()
 ```
 
 
-![png](output_21_0.png)
+![png](./img/output_21_0.png)
 
 
 
-![png](output_21_1.png)
+![png](./img/output_21_1.png)
 
 
 
-![png](output_21_2.png)
+![png](./img/output_21_2.png)
 
 
 ### 5-2. Reflection
@@ -1058,21 +1058,21 @@ In this section, the end-to-end problem solution and discusses one particular as
 
 In this paper, in order to verify how useful CNN is for time-series forecasting, RNN, LSTM, CNN+LSTM are build to predict Close price of Google from 4 features, open, high, low and volume. As a result, CNN+LSTM perform best in terms of MSE and Learning Speed.  
 
-As for preprocessing, window is set to 10 in this paper and the values are normalized in the window datasets. After do that, all the deep learning models with 7 layers are trained on the train datasets and evaluated on the test datasets. 
+As for preprocessing, window is set to 10 in this paper and the values are normalized in the window datasets. After do that, all the deep learning models with 7 layers are trained on the train datasets and evaluated on the test datasets.
 
 As for found interesting and difficult, CNN was only used for image recognition in my learning experience. Now, it is interesting that CNN combined with LSTM is employed and CNN shows its capability to solve time-series datasets.  
-In contrast to this, it is difficult to win stock trading with machine learning. As shown above, preds of 1d-CNN+LSTM and LSTM are not usefull to win the stock trading. 
+In contrast to this, it is difficult to win stock trading with machine learning. As shown above, preds of 1d-CNN+LSTM and LSTM are not usefull to win the stock trading.
 
-Anyway, this experience to employing various deep learning models to solve this problem helps me to solve a problem with various approach. 
+Anyway, this experience to employing various deep learning models to solve this problem helps me to solve a problem with various approach.
 
 
 ### 5-3. Improvement
-In this section, discussion is made as to how one aspect of the implementation could be improved. 
+In this section, discussion is made as to how one aspect of the implementation could be improved.
 
-In order to build algorithm trading system which predicts well and can win the stock price trading, theare are three potential approch. 
-- Change my data: Feature engineering with the existing models. 
-- Change my model and data: CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is correspoding to Google, Apple, Facebook, and Amazon stock datasets. 
-- Change my model: In order to 'win' trading, Deep-Reinforcement approach is usefull because it can learn policy with three actions of sell, stay, buy. 
+In order to build algorithm trading system which predicts well and can win the stock price trading, theare are three potential approch.
+- Change my data: Feature engineering with the existing models.
+- Change my model and data: CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is correspoding to Google, Apple, Facebook, and Amazon stock datasets.
+- Change my model: In order to 'win' trading, Deep-Reinforcement approach is usefull because it can learn policy with three actions of sell, stay, buy.
 
 I appreciate your spending time on my papaer.  
 Sincerely,  
