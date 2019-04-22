@@ -1,13 +1,13 @@
 
-# <u>Machine Learning Engineer Nanodegree</u>  
-## Capstone Project: Google Stock Price Prediction with Deep Learning Models
+## <u>Machine Learning Engineer Nanodegree</u>  
+### Capstone Project:
+### Google Stock Price Prediction with Deep Learning Models
 Masaharu KINOSHITA  
 e-mail: <k.masaharu0219@gmail.com>  
 LinkedIn: [masaharu kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/) *I prefer linkedin for communication with you.  
 Apr, 2019  
-project specifications: [review points](https://review.udacity.com/#!/rubrics/108/view)
 
-## <u>Agenda</u>
+### <u>Agenda</u>
 **#1. Definition** ------- How do I establish this Problem?  
 **#2. Analysis** -------- How do I define problem solving and design my approach?  
 **#3. Methodology** -- How do I conduct this approach in terms of data science?  
@@ -15,23 +15,27 @@ project specifications: [review points](https://review.udacity.com/#!/rubrics/10
 **#5. Conclusions**
 
 ---
-## <u>#1. Definition</u>
-### 1-1. Project Overview:
-In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle. As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. In order to show that RNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.  
+### <u>#1. Definition</u>
+#### 1-1. Project Overview:
+In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs). As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. [*1](https://www.researchgate.net/publication/328445708_CNNPred_CNN-based_stock_market_prediction_using_several_data_sources) [,2](https://www.ai-gakkai.or.jp/jsai2017/webprogram/2017/pdf/1112.pdf). In order to show that RNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.  
 
-### 1-2. Problem Statement:
+#### 1-2. Problem Statement:
 In this proposal, usability of deep learning, especially CNN as an feature extractor, is verified. Although CNN is known to be valid in the field of Image Recognition, few use-case of CNN are applied to finance problem, such as stock price predictions. This is because a lot of Algorithm Trading has employed technical index so far. These index, however, are commonly used and developed by humans. So, it can be said that there is some room to improve Trading Algorithm.  
 In this context, applying CNN to the finance problem and validation of its usefulness is meaningful as CNN has high potential to recognize patterns in given dataset and computational power has advanced so far.  
 In order to valid the usefulness of LSTM and CNN+LSTM are compared to the stock price predictions with metrics MSE. In addition to this, RNN is set as base-models. By comparing the four models with MSE, the usefulness of CNN are verified in the stock price problem.  
 
-### 1-3. Metrics:
+#### 1-3. Metrics:
 As mentioned above, MSE is evaluation metrics. Needless to say, less MSE is better for stock price prediction. The reasons of employing MSE in this problem are the followings.  
 First, the target value, which is daily close stock price, is continuous. So, this is regression problem.  
 Second, more penalty is added to larger error with MSE compared to MAE by employing squared value.  
-Therefore, MSE is employed as evaluation metrics.
+Therefore, MSE is employed as evaluation metrics.  
+
+<img src='./img/mse.png' width=20%>   
 
 ---
-## <u>#2. Analysis</u>
+<div style="page-break-before:always"></div>  
+
+### <u>#2. Analysis</u>
 
 
 ```python
@@ -49,7 +53,7 @@ warnings.filterwarnings('ignore')
 base_path = os.getcwd()
 ```
 
-### 2-1. Data Exploration
+#### 2-1. Data Exploration
 In this problem, google stock price datasets obtained [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs) are used. Stock datasets from 2014-03-27 to 2017-05-01 are used as train datasets. Stock datasets from 2017-05-01 to 2017-11-10 are used as test datasets.  
 **1. train.csv**  
 - number of rows: 780
@@ -302,7 +306,7 @@ print(X_train.describe())
     max    910.660000  916.850000  905.770000  1.116490e+07
 
 
-### 2-2. Exploratory Visualization
+#### 2-2. Exploratory Visualization
 In this section, the Close Price of train and test datasets, which is target value, are visualized. As shown below, the Close price of google are increasing from 2014-03-27 to 2017-11-10.
 
 
@@ -324,18 +328,53 @@ plt.show()
 ![png](./img/output_8_0.png)
 
 
-### 2-3. Algorithms and Techniques
-In this paper, deep learning models performing well for time-series predictions, RNN, LSTM, CNN+LSTM, are used because the Close Price are relevant with the past stock information, which is our input data such as Open, High, Low, Volume columns. By applying RNN, LSTM, CNN+LSTM models to this time-series forecasting problem, how useful CNN is to solve time-series prediction problem is verified.
+#### 2-3. Algorithms and Techniques
+In this paper, deep learning models performing well for time-series predictions, [RNN, LSTM](http://colah.github.io/posts/2015-08-Understanding-LSTMs/), CNN+LSTM, are used because the Close Price are relevant with the past stock information, which is our input data such as Open, High, Low, Volume columns. By applying RNN, LSTM, CNN+LSTM models to this time-series forecasting problem, how useful CNN is to solve time-series prediction problem is verified.
 
-### 2-4. Benchmark
+**# What is RNN?**  
+One of the appeals of RNNs is the idea that they might be able to connect previous information to the present task, such as using previous video frames might inform the understanding of the present frame. RNNs can learn to use the past information with the following repeating module. Unfortunately, **as that gap grows, RNNs become unable to learn to connect the information**.  
+
+<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-SimpleRNN.png" width=50%>  
+
+
+**# What is LSTM?**  
+Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. They were introduced by Hochreiter & Schmidhuber (1997), and were refined and popularized by many people in following work.  
+
+LSTMs are explicitly designed to avoid the long-term dependency problem. Remembering information for long periods of time is practically their default behavior, not something they struggle to learn! LSTMs also have this chain like structure, but the repeating module has a different structure. Instead of having a single neural network layer, there are four, interacting in a very special way.  
+<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png" width=50%>  
+
+The key to LSTMs is the memory-cell, the horizontal line running through the top of the diagram.
+The cell state is kind of like a conveyor belt. It runs straight down the entire chain, with only some minor linear interactions. It’s very easy for information to just flow along it unchanged. This concept realizes Long Short-term Memory.  
+
+<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-C-line.png" width=50%>  
+
+The first step in our LSTM is to decide what information we’re going to throw away from the cell state. This decision is made by a sigmoid layer called the **“forget gate layer.”** This gate get rid of unnecessary information from the memory-cell.  
+
+<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png" width=50%>   
+
+The next step is to decide what new information we’re going to store in the cell state. This has two parts. First, a sigmoid layer called the **“input gate layer”** decides which values we’ll update. The input gate layer take necessary infromation into the memory-cell to keep during leanring.  
+<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png" width=50%>   
+
+Finally, we need to decide what we’re going to output. This output will be based on our cell state, but will be a filtered version. First, we run a sigmoid layer which decides what parts of the cell state we’re going to output. Then, we put the cell state through tanh (to push the values to be between −1 and 1) and multiply it by **"the output of the sigmoid gate"**, so that we only output the parts we decided to.
+<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-o.png" width=50%>   
+
+#### 2-4. Benchmark
 In this problem, RNN model is build to get base MSE as benchmark model. RNN, one of the famous deep learning models, is often used for time-series forecasting. This is an usual score with conventional method employing deep learning. As mentioned above, the metrics with which the benchmark model is measured is also MSE.
 
+As described more in the next section 'Methodology', the benchmark MSE socre obtained by RNN with 7 layers composed of 6 simple-RNNs and 1 Dense layer is **0.00171**. This value is the benchmark MSE score. As you may know, the smaller, the better.
+
 ---
-# <u>#3. Methodology</u>
-### 3-1. Data Preprocessing
-In this section, preprocessing datasets, especially normalization, is explained. In this problem, the datasets are normalized within window datasets.  
-More concretely speaking, window datasets values are devided by the value of its first index, 0. After do that, the values devided are minus 1 in order to set the value range from -1.0 to 1.0. This noramlization allows my deep learning models to learn more first and get properly regularization term effect. Actually, in this paper, no regularization approch are employed because this don't meet my goal which is to verify CNN potential for time-series forecasting.  
-In this time, 10 is employed for the window length.
+<div style="page-break-before:always"></div>  
+
+## <u>#3. Methodology</u>
+#### 3-1. Data Preprocessing
+In this section, preprocessing approaches, hold-out and normalization, are explained.
+
+In this problem, the original datasets are split into train and test datasets so that deep learning models can aquire generalized performance.  
+
+This technique is known as **hold-out**. The usual test datasets ratio may be 20%, however, in this case, test datasets ratio is 15% because given datasets are not so enough that deep learning model learn from that.
+
+As for **normalization**, it is conducted within window datasets. More concretely speaking, window datasets values are devided by the value of its first index, 0. After do that, the values devided are minus 1 in order to set the value range from -1.0 to 1.0. This noramlization allows my deep learning models to learn more first and get properly regularization term effect. Actually, in this paper, no regularization approch are employed because this don't meet my goal which is to verify CNN potential for time-series forecasting.  In this time, 10 is employed for the window length.
 
 
 ```python
@@ -372,15 +411,27 @@ print('y_train shape: ', y_train_fin.shape)
     y_train shape:  (770,)
 
 
-### 3-2. Implementation
+#### 3-2. Implementation
 The process for which metrics, algorithms, and techniques were implemented with the given datasets or input data has been thoroughly documented.  
-As for metics, MSE are employed in order to give more penalty on larger error compared to MAE because it is squared value.
 
-As for algorithms and techniques, deep learning models are selected to perform well on this time-series problem. As mentioned above, RNN is employed as benchmark model. It is widely used for time-series prediction problem. According the convention, deep learning model with 7 layers which are composed of 6 RNN layers and 1 Dence is epmployed as benchmark model and trained on those datasets.  
+As for **metics**, MSE are employed in order to give more penalty on larger error compared to MAE because it employs squared value.
 
-But, RNN model reaches the limit at about 0.0017 MSE on the test datasets although layers are stacked and increase number of epoch. As it is shown in the learning curve, RNN's curve reach the limit.  
+As for **deep learning models**, models performing well on a time-series problem are selected. As mentioned above, RNN is employed as benchmark model. It has been widely used for time-series prediction problem so far. According the convention, RNN is selected and RNN network with 7 layers composed of 6 RNN layers and 1 Dence is epmployed as the benchmark model and trained on those datasets with 'adam' optimizer.  
 
-### 3-3. Refinement
+As for **optimizer**, **['adam'](https://arxiv.org/pdf/1412.6980.pdf)** is used in this paper.  
+Adam is a popular algorithm in the field of deep learning because it achieves good results fast.In the original paper, Adam was demonstrated empirically to show that convergence meets the expectations of the theoretical analysis. Adam was applied to the logistic regression algorithm on the MNIST character recognition and IMDB sentiment analysis datasets, a Multilayer Perceptron algorithm on the MNIST dataset and Convolutional Neural Networks on the CIFAR-10 image recognition dataset.   
+
+How does adam work? Adam is different from classical stochastic gradient descent. SGD maintains a single learning rate (termed alpha) for all weight updates and the learning rate does not change during training. In contrast to this, adam realizes the benefits of both AdaGrad and RMSProp.
+- **Adaptive Gradient Algorithm (AdaGrad)** that maintains a per-parameter learning rate that improves performance on problems with sparse gradients (e.g. natural language and computer vision problems).  
+- **Root Mean Square Propagation (RMSProp)** that also maintains per-parameter learning rates that are adapted based on the average of recent magnitudes of the gradients for the weight (e.g. how quickly it is changing). This means the algorithm does well on online and non-stationary problems (e.g. noisy).
+
+
+Instead of adapting the parameter learning rates based on the average first moment (the mean) as in RMSProp, Adam also makes use of the average of the second moments of the gradients (the uncentered variance).
+Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters beta1 and beta2 control the decay rates of these moving averages.
+
+All of the deep learning models used in this paper are trained with adam otimizer. However, RNN model reaches the limit at about 0.0017 MSE on the test datasets although layers are stacked and increase number of epoch. As it is shown in the learning curve, RNN's curve reach the limit.  
+
+#### 3-3. Refinement
 So, LSTM which has capability to learn logn-term dependencies are employed as second deep leanring model. LSTM model is composed of 7layers which are 6 layers LSTM and 1 Dense layer as the same as RNN.  
 
 After trainig, LSTM performs better on the test datasets than RNN and it achieves 0.00024 MSE in comparision with 0.017, benchmark score of RNN.  
@@ -588,80 +639,7 @@ print ("elapsed_time:{0}".format(elapsed_time_cnn_lstm) + "[sec]")
     770/770 [==============================] - 96s 125ms/step - loss: 0.0758 - mean_absolute_error: 0.1970 - val_loss: 0.0212 - val_mean_absolute_error: 0.1187
     Epoch 2/40
     770/770 [==============================] - 1s 1ms/step - loss: 0.0208 - mean_absolute_error: 0.1013 - val_loss: 0.0134 - val_mean_absolute_error: 0.0783
-    Epoch 3/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0116 - mean_absolute_error: 0.0751 - val_loss: 0.0080 - val_mean_absolute_error: 0.0683
-    Epoch 4/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0075 - mean_absolute_error: 0.0605 - val_loss: 0.0055 - val_mean_absolute_error: 0.0541
-    Epoch 5/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0059 - mean_absolute_error: 0.0540 - val_loss: 0.0054 - val_mean_absolute_error: 0.0555
-    Epoch 6/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0049 - mean_absolute_error: 0.0513 - val_loss: 0.0045 - val_mean_absolute_error: 0.0497
-    Epoch 7/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0043 - mean_absolute_error: 0.0472 - val_loss: 0.0050 - val_mean_absolute_error: 0.0506
-    Epoch 8/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0037 - mean_absolute_error: 0.0442 - val_loss: 0.0041 - val_mean_absolute_error: 0.0475
-    Epoch 9/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0033 - mean_absolute_error: 0.0407 - val_loss: 0.0039 - val_mean_absolute_error: 0.0468
-    Epoch 10/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0045 - mean_absolute_error: 0.0494 - val_loss: 0.0032 - val_mean_absolute_error: 0.0413
-    Epoch 11/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0030 - mean_absolute_error: 0.0403 - val_loss: 0.0035 - val_mean_absolute_error: 0.0414
-    Epoch 12/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0027 - mean_absolute_error: 0.0373 - val_loss: 0.0031 - val_mean_absolute_error: 0.0399
-    Epoch 13/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0025 - mean_absolute_error: 0.0365 - val_loss: 0.0029 - val_mean_absolute_error: 0.0394
-    Epoch 14/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0044 - mean_absolute_error: 0.0440 - val_loss: 0.0035 - val_mean_absolute_error: 0.0424
-    Epoch 15/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0032 - mean_absolute_error: 0.0406 - val_loss: 0.0022 - val_mean_absolute_error: 0.0358
-    Epoch 16/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0027 - mean_absolute_error: 0.0382 - val_loss: 0.0034 - val_mean_absolute_error: 0.0384
-    Epoch 17/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0024 - mean_absolute_error: 0.0343 - val_loss: 0.0022 - val_mean_absolute_error: 0.0345
-    Epoch 18/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0021 - mean_absolute_error: 0.0327 - val_loss: 0.0021 - val_mean_absolute_error: 0.0328
-    Epoch 19/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0022 - mean_absolute_error: 0.0332 - val_loss: 0.0022 - val_mean_absolute_error: 0.0339
-    Epoch 20/40
-    770/770 [==============================] - 1s 2ms/step - loss: 0.0023 - mean_absolute_error: 0.0340 - val_loss: 0.0018 - val_mean_absolute_error: 0.0317
-    Epoch 21/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0022 - mean_absolute_error: 0.0328 - val_loss: 0.0028 - val_mean_absolute_error: 0.0377
-    Epoch 22/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0023 - mean_absolute_error: 0.0349 - val_loss: 0.0024 - val_mean_absolute_error: 0.0361
-    Epoch 23/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0021 - mean_absolute_error: 0.0324 - val_loss: 0.0033 - val_mean_absolute_error: 0.0396
-    Epoch 24/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0029 - mean_absolute_error: 0.0378 - val_loss: 0.0021 - val_mean_absolute_error: 0.0348
-    Epoch 25/40
-    770/770 [==============================] - 1s 2ms/step - loss: 0.0025 - mean_absolute_error: 0.0365 - val_loss: 0.0031 - val_mean_absolute_error: 0.0396
-    Epoch 26/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0020 - mean_absolute_error: 0.0327 - val_loss: 0.0024 - val_mean_absolute_error: 0.0341
-    Epoch 27/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0020 - mean_absolute_error: 0.0313 - val_loss: 0.0022 - val_mean_absolute_error: 0.0329
-    Epoch 28/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0017 - mean_absolute_error: 0.0293 - val_loss: 0.0017 - val_mean_absolute_error: 0.0299
-    Epoch 29/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0017 - mean_absolute_error: 0.0291 - val_loss: 0.0022 - val_mean_absolute_error: 0.0325
-    Epoch 30/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0017 - mean_absolute_error: 0.0299 - val_loss: 0.0030 - val_mean_absolute_error: 0.0432
-    Epoch 31/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0024 - mean_absolute_error: 0.0375 - val_loss: 0.0019 - val_mean_absolute_error: 0.0325
-    Epoch 32/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0015 - mean_absolute_error: 0.0276 - val_loss: 0.0020 - val_mean_absolute_error: 0.0320
-    Epoch 33/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0014 - mean_absolute_error: 0.0269 - val_loss: 0.0019 - val_mean_absolute_error: 0.0308
-    Epoch 34/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0014 - mean_absolute_error: 0.0269 - val_loss: 0.0021 - val_mean_absolute_error: 0.0332
-    Epoch 35/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0016 - mean_absolute_error: 0.0296 - val_loss: 0.0022 - val_mean_absolute_error: 0.0327
-    Epoch 36/40
-    770/770 [==============================] - 1s 2ms/step - loss: 0.0015 - mean_absolute_error: 0.0276 - val_loss: 0.0021 - val_mean_absolute_error: 0.0325
-    Epoch 37/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0015 - mean_absolute_error: 0.0272 - val_loss: 0.0021 - val_mean_absolute_error: 0.0335
-    Epoch 38/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0015 - mean_absolute_error: 0.0280 - val_loss: 0.0024 - val_mean_absolute_error: 0.0324
-    Epoch 39/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0013 - mean_absolute_error: 0.0258 - val_loss: 0.0020 - val_mean_absolute_error: 0.0303
+    # short-cut
     Epoch 40/40
     770/770 [==============================] - 1s 1ms/step - loss: 0.0015 - mean_absolute_error: 0.0284 - val_loss: 0.0026 - val_mean_absolute_error: 0.0363
     elapsed_time:139.41530799865723[sec]
@@ -673,80 +651,7 @@ print ("elapsed_time:{0}".format(elapsed_time_cnn_lstm) + "[sec]")
     770/770 [==============================] - 87s 113ms/step - loss: 0.0020 - mean_absolute_error: 0.0315 - val_loss: 0.0011 - val_mean_absolute_error: 0.0274
     Epoch 2/40
     770/770 [==============================] - 2s 3ms/step - loss: 0.0019 - mean_absolute_error: 0.0309 - val_loss: 0.0011 - val_mean_absolute_error: 0.0272
-    Epoch 3/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0019 - mean_absolute_error: 0.0304 - val_loss: 9.9572e-04 - val_mean_absolute_error: 0.0270
-    Epoch 4/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0019 - mean_absolute_error: 0.0302 - val_loss: 9.3300e-04 - val_mean_absolute_error: 0.0262
-    Epoch 5/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0019 - mean_absolute_error: 0.0308 - val_loss: 8.9569e-04 - val_mean_absolute_error: 0.0257
-    Epoch 6/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0016 - mean_absolute_error: 0.0280 - val_loss: 7.4769e-04 - val_mean_absolute_error: 0.0233
-    Epoch 7/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0015 - mean_absolute_error: 0.0274 - val_loss: 7.8363e-04 - val_mean_absolute_error: 0.0236
-    Epoch 8/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0014 - mean_absolute_error: 0.0264 - val_loss: 6.9002e-04 - val_mean_absolute_error: 0.0222
-    Epoch 9/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0014 - mean_absolute_error: 0.0259 - val_loss: 7.0472e-04 - val_mean_absolute_error: 0.0224
-    Epoch 10/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0013 - mean_absolute_error: 0.0256 - val_loss: 6.5271e-04 - val_mean_absolute_error: 0.0214
-    Epoch 11/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0012 - mean_absolute_error: 0.0248 - val_loss: 5.8320e-04 - val_mean_absolute_error: 0.0200
-    Epoch 12/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0011 - mean_absolute_error: 0.0240 - val_loss: 5.6682e-04 - val_mean_absolute_error: 0.0199
-    Epoch 13/40
-    770/770 [==============================] - 2s 3ms/step - loss: 0.0011 - mean_absolute_error: 0.0232 - val_loss: 4.7424e-04 - val_mean_absolute_error: 0.0178
-    Epoch 14/40
-    770/770 [==============================] - 2s 3ms/step - loss: 9.4476e-04 - mean_absolute_error: 0.0219 - val_loss: 4.7416e-04 - val_mean_absolute_error: 0.0174
-    Epoch 15/40
-    770/770 [==============================] - 3s 3ms/step - loss: 9.2023e-04 - mean_absolute_error: 0.0214 - val_loss: 4.1485e-04 - val_mean_absolute_error: 0.0166
-    Epoch 16/40
-    770/770 [==============================] - 3s 3ms/step - loss: 8.6725e-04 - mean_absolute_error: 0.0209 - val_loss: 4.1223e-04 - val_mean_absolute_error: 0.0164
-    Epoch 17/40
-    770/770 [==============================] - 3s 3ms/step - loss: 8.2316e-04 - mean_absolute_error: 0.0204 - val_loss: 4.0517e-04 - val_mean_absolute_error: 0.0161
-    Epoch 18/40
-    770/770 [==============================] - 3s 4ms/step - loss: 8.1077e-04 - mean_absolute_error: 0.0202 - val_loss: 4.0242e-04 - val_mean_absolute_error: 0.0162
-    Epoch 19/40
-    770/770 [==============================] - 3s 3ms/step - loss: 7.7750e-04 - mean_absolute_error: 0.0199 - val_loss: 3.6777e-04 - val_mean_absolute_error: 0.0151
-    Epoch 20/40
-    770/770 [==============================] - 3s 4ms/step - loss: 7.6712e-04 - mean_absolute_error: 0.0198 - val_loss: 3.8608e-04 - val_mean_absolute_error: 0.0150
-    Epoch 21/40
-    770/770 [==============================] - 3s 4ms/step - loss: 7.4117e-04 - mean_absolute_error: 0.0194 - val_loss: 3.7195e-04 - val_mean_absolute_error: 0.0146
-    Epoch 22/40
-    770/770 [==============================] - 3s 3ms/step - loss: 8.0967e-04 - mean_absolute_error: 0.0205 - val_loss: 3.6169e-04 - val_mean_absolute_error: 0.0155
-    Epoch 23/40
-    770/770 [==============================] - 2s 3ms/step - loss: 7.0332e-04 - mean_absolute_error: 0.0190 - val_loss: 3.4494e-04 - val_mean_absolute_error: 0.0148
-    Epoch 24/40
-    770/770 [==============================] - 2s 3ms/step - loss: 7.0735e-04 - mean_absolute_error: 0.0190 - val_loss: 3.4777e-04 - val_mean_absolute_error: 0.0151
-    Epoch 25/40
-    770/770 [==============================] - 2s 3ms/step - loss: 6.7579e-04 - mean_absolute_error: 0.0186 - val_loss: 3.3909e-04 - val_mean_absolute_error: 0.0147
-    Epoch 26/40
-    770/770 [==============================] - 2s 3ms/step - loss: 6.3325e-04 - mean_absolute_error: 0.0181 - val_loss: 3.3330e-04 - val_mean_absolute_error: 0.0141
-    Epoch 27/40
-    770/770 [==============================] - 2s 3ms/step - loss: 6.2791e-04 - mean_absolute_error: 0.0180 - val_loss: 3.1951e-04 - val_mean_absolute_error: 0.0143
-    Epoch 28/40
-    770/770 [==============================] - 3s 4ms/step - loss: 6.0447e-04 - mean_absolute_error: 0.0178 - val_loss: 3.3576e-04 - val_mean_absolute_error: 0.0151
-    Epoch 29/40
-    770/770 [==============================] - 3s 3ms/step - loss: 5.8215e-04 - mean_absolute_error: 0.0175 - val_loss: 3.0479e-04 - val_mean_absolute_error: 0.0139
-    Epoch 30/40
-    770/770 [==============================] - 3s 3ms/step - loss: 5.5936e-04 - mean_absolute_error: 0.0171 - val_loss: 3.0046e-04 - val_mean_absolute_error: 0.0140
-    Epoch 31/40
-    770/770 [==============================] - 2s 3ms/step - loss: 5.5760e-04 - mean_absolute_error: 0.0169 - val_loss: 3.2719e-04 - val_mean_absolute_error: 0.0150
-    Epoch 32/40
-    770/770 [==============================] - 2s 3ms/step - loss: 5.5554e-04 - mean_absolute_error: 0.0170 - val_loss: 2.8664e-04 - val_mean_absolute_error: 0.0137
-    Epoch 33/40
-    770/770 [==============================] - 2s 3ms/step - loss: 5.3197e-04 - mean_absolute_error: 0.0167 - val_loss: 2.8954e-04 - val_mean_absolute_error: 0.0139
-    Epoch 34/40
-    770/770 [==============================] - 2s 3ms/step - loss: 5.1462e-04 - mean_absolute_error: 0.0165 - val_loss: 2.8693e-04 - val_mean_absolute_error: 0.0136
-    Epoch 35/40
-    770/770 [==============================] - 2s 3ms/step - loss: 5.0091e-04 - mean_absolute_error: 0.0162 - val_loss: 2.8403e-04 - val_mean_absolute_error: 0.0128
-    Epoch 36/40
-    770/770 [==============================] - 2s 3ms/step - loss: 4.9489e-04 - mean_absolute_error: 0.0162 - val_loss: 2.6550e-04 - val_mean_absolute_error: 0.0129
-    Epoch 37/40
-    770/770 [==============================] - 2s 3ms/step - loss: 4.8455e-04 - mean_absolute_error: 0.0159 - val_loss: 2.6213e-04 - val_mean_absolute_error: 0.0130
-    Epoch 38/40
-    770/770 [==============================] - 2s 3ms/step - loss: 4.7847e-04 - mean_absolute_error: 0.0159 - val_loss: 2.5086e-04 - val_mean_absolute_error: 0.0126
-    Epoch 39/40
-    770/770 [==============================] - 3s 3ms/step - loss: 4.4347e-04 - mean_absolute_error: 0.0151 - val_loss: 2.9471e-04 - val_mean_absolute_error: 0.0145
+    # short-cut
     Epoch 40/40
     770/770 [==============================] - 3s 3ms/step - loss: 5.0619e-04 - mean_absolute_error: 0.0162 - val_loss: 2.4449e-04 - val_mean_absolute_error: 0.0127
     elapsed_time:196.04686617851257[sec]
@@ -758,80 +663,7 @@ print ("elapsed_time:{0}".format(elapsed_time_cnn_lstm) + "[sec]")
     770/770 [==============================] - 82s 107ms/step - loss: 0.0019 - mean_absolute_error: 0.0310 - val_loss: 0.0010 - val_mean_absolute_error: 0.0273
     Epoch 2/40
     770/770 [==============================] - 1s 1ms/step - loss: 0.0019 - mean_absolute_error: 0.0309 - val_loss: 0.0010 - val_mean_absolute_error: 0.0272
-    Epoch 3/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0020 - mean_absolute_error: 0.0320 - val_loss: 0.0010 - val_mean_absolute_error: 0.0271
-    Epoch 4/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0019 - mean_absolute_error: 0.0307 - val_loss: 0.0010 - val_mean_absolute_error: 0.0271
-    Epoch 5/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0019 - mean_absolute_error: 0.0308 - val_loss: 0.0010 - val_mean_absolute_error: 0.0270
-    Epoch 6/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0019 - mean_absolute_error: 0.0306 - val_loss: 0.0010 - val_mean_absolute_error: 0.0268
-    Epoch 7/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0018 - mean_absolute_error: 0.0302 - val_loss: 8.8847e-04 - val_mean_absolute_error: 0.0253
-    Epoch 8/40
-    770/770 [==============================] - 1s 1ms/step - loss: 0.0012 - mean_absolute_error: 0.0244 - val_loss: 4.3290e-04 - val_mean_absolute_error: 0.0164
-    Epoch 9/40
-    770/770 [==============================] - 1s 1ms/step - loss: 8.2203e-04 - mean_absolute_error: 0.0211 - val_loss: 4.2308e-04 - val_mean_absolute_error: 0.0164
-    Epoch 10/40
-    770/770 [==============================] - 1s 1ms/step - loss: 7.5099e-04 - mean_absolute_error: 0.0203 - val_loss: 4.4489e-04 - val_mean_absolute_error: 0.0174
-    Epoch 11/40
-    770/770 [==============================] - 1s 1ms/step - loss: 6.5946e-04 - mean_absolute_error: 0.0192 - val_loss: 3.4766e-04 - val_mean_absolute_error: 0.0149
-    Epoch 12/40
-    770/770 [==============================] - 1s 1ms/step - loss: 6.3470e-04 - mean_absolute_error: 0.0189 - val_loss: 3.5423e-04 - val_mean_absolute_error: 0.0151
-    Epoch 13/40
-    770/770 [==============================] - 1s 1ms/step - loss: 5.5599e-04 - mean_absolute_error: 0.0177 - val_loss: 4.5049e-04 - val_mean_absolute_error: 0.0165
-    Epoch 14/40
-    770/770 [==============================] - 1s 1ms/step - loss: 5.6145e-04 - mean_absolute_error: 0.0178 - val_loss: 3.6791e-04 - val_mean_absolute_error: 0.0151
-    Epoch 15/40
-    770/770 [==============================] - 1s 1ms/step - loss: 5.3706e-04 - mean_absolute_error: 0.0175 - val_loss: 3.1282e-04 - val_mean_absolute_error: 0.0140
-    Epoch 16/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.8281e-04 - mean_absolute_error: 0.0166 - val_loss: 3.1970e-04 - val_mean_absolute_error: 0.0142
-    Epoch 17/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.8522e-04 - mean_absolute_error: 0.0167 - val_loss: 3.0561e-04 - val_mean_absolute_error: 0.0140
-    Epoch 18/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.3345e-04 - mean_absolute_error: 0.0157 - val_loss: 3.1681e-04 - val_mean_absolute_error: 0.0145
-    Epoch 19/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.2281e-04 - mean_absolute_error: 0.0156 - val_loss: 2.8256e-04 - val_mean_absolute_error: 0.0135
-    Epoch 20/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.4170e-04 - mean_absolute_error: 0.0160 - val_loss: 3.1479e-04 - val_mean_absolute_error: 0.0146
-    Epoch 21/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.1381e-04 - mean_absolute_error: 0.0154 - val_loss: 2.9527e-04 - val_mean_absolute_error: 0.0136
-    Epoch 22/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.0365e-04 - mean_absolute_error: 0.0152 - val_loss: 2.9318e-04 - val_mean_absolute_error: 0.0141
-    Epoch 23/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.8640e-04 - mean_absolute_error: 0.0148 - val_loss: 2.9845e-04 - val_mean_absolute_error: 0.0142
-    Epoch 24/40
-    770/770 [==============================] - 1s 1ms/step - loss: 4.0363e-04 - mean_absolute_error: 0.0153 - val_loss: 2.5765e-04 - val_mean_absolute_error: 0.0129
-    Epoch 25/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.5268e-04 - mean_absolute_error: 0.0141 - val_loss: 2.5262e-04 - val_mean_absolute_error: 0.0128
-    Epoch 26/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.4890e-04 - mean_absolute_error: 0.0141 - val_loss: 2.5423e-04 - val_mean_absolute_error: 0.0130
-    Epoch 27/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.4633e-04 - mean_absolute_error: 0.0140 - val_loss: 2.4851e-04 - val_mean_absolute_error: 0.0125
-    Epoch 28/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.3661e-04 - mean_absolute_error: 0.0138 - val_loss: 2.6514e-04 - val_mean_absolute_error: 0.0133
-    Epoch 29/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.3059e-04 - mean_absolute_error: 0.0137 - val_loss: 2.3569e-04 - val_mean_absolute_error: 0.0123
-    Epoch 30/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.3688e-04 - mean_absolute_error: 0.0138 - val_loss: 2.4853e-04 - val_mean_absolute_error: 0.0129
-    Epoch 31/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.2455e-04 - mean_absolute_error: 0.0136 - val_loss: 2.5361e-04 - val_mean_absolute_error: 0.0130
-    Epoch 32/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.1792e-04 - mean_absolute_error: 0.0132 - val_loss: 2.6791e-04 - val_mean_absolute_error: 0.0133
-    Epoch 33/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.2141e-04 - mean_absolute_error: 0.0134 - val_loss: 2.9890e-04 - val_mean_absolute_error: 0.0142
-    Epoch 34/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.3410e-04 - mean_absolute_error: 0.0136 - val_loss: 2.6043e-04 - val_mean_absolute_error: 0.0128
-    Epoch 35/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.0004e-04 - mean_absolute_error: 0.0129 - val_loss: 2.7149e-04 - val_mean_absolute_error: 0.0135
-    Epoch 36/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.0495e-04 - mean_absolute_error: 0.0130 - val_loss: 3.3206e-04 - val_mean_absolute_error: 0.0149
-    Epoch 37/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.1130e-04 - mean_absolute_error: 0.0133 - val_loss: 2.8423e-04 - val_mean_absolute_error: 0.0139
-    Epoch 38/40
-    770/770 [==============================] - 1s 1ms/step - loss: 2.9565e-04 - mean_absolute_error: 0.0129 - val_loss: 2.6627e-04 - val_mean_absolute_error: 0.0134
-    Epoch 39/40
-    770/770 [==============================] - 1s 1ms/step - loss: 3.0282e-04 - mean_absolute_error: 0.0131 - val_loss: 2.4548e-04 - val_mean_absolute_error: 0.0129
+    # short cut
     Epoch 40/40
     770/770 [==============================] - 1s 1ms/step - loss: 2.8299e-04 - mean_absolute_error: 0.0127 - val_loss: 2.3856e-04 - val_mean_absolute_error: 0.0125
     elapsed_time:133.61206912994385[sec]
@@ -907,19 +739,22 @@ for key, hist_value in history_dict.items():
 
 
 ---
-# <u>#4. Results</u>
-### 4-1. Model Evaluation and Validation
+<div style="page-break-before:always"></div>  
+
+## <u>#4. Results</u>
+#### 4-1. Model Evaluation and Validation
 In this section, the final model's qualities such as its robustness are evaluated.  
 
 As shown in the above learning curves, the three models has generalized perfomance because they perform well on both train and test datasets in terms of MSE, which is metrics.  
 
 In addition to this, the parameter's value of each model is respectively visualized in the below distribution plots. The distribution graphs show that parametes value of network distribute from -0.5 to 0.5 although bias values distribute mostly aroung 0. This means that the deep learning models are a little bit redundancy network to solve this problem.
 
-### 4-2. Justification
+#### 4-2. Justification
 In this sectioin, the final results are compared to the benchmark result and justification is made as to whether the final model and solution is significant enough to have adequately solved the problem.  
 
 MSEs of both LSTM and CNN+LSTM are smaller by approximately 86% on the given train and test datasets than the benchmark score, which is RNN's MSE.  
 In terms of learning speed, CNN+LSTM are shortest than RNN and LSTM.  
+
 From the above, it can be said that CNN+LSTM is valid approach to solve time-series forecasting.
 
 
@@ -984,8 +819,10 @@ plt.show()
 
 
 ---
-# <u>#5. Conclusion</u>
-### 5-1. Free-Form Visualization
+<div style="page-break-before:always"></div>  
+
+## <u>#5. Conclusion</u>
+#### 5-1. Free-Form Visualization
 In this section, a visualization has been provided that emphasizes an important quality about the project with thorough discussion.  
 
 In this paper, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle and their predictions are compared with MSE. As a result, CNN+LSTM and LSTM's MSE are minimum adn CNN+LSTM's learning time is shortest amongst the three models. This shows that applying CNN to time-series forecasting is valid.  
@@ -1053,7 +890,7 @@ plt.show()
 ![png](./img/output_21_2.png)
 
 
-### 5-2. Reflection
+#### 5-2. Reflection
 In this section, the end-to-end problem solution and discusses one particular aspects of the project they found interesting or difficult.  
 
 In this paper, in order to verify how useful CNN is for time-series forecasting, RNN, LSTM, CNN+LSTM are build to predict Close price of Google from 4 features, open, high, low and volume. As a result, CNN+LSTM perform best in terms of MSE and Learning Speed.  
@@ -1066,14 +903,21 @@ In contrast to this, it is difficult to win stock trading with machine learning.
 Anyway, this experience to employing various deep learning models to solve this problem helps me to solve a problem with various approach.
 
 
-### 5-3. Improvement
+#### 5-3. Improvement
 In this section, discussion is made as to how one aspect of the implementation could be improved.
 
 In order to build algorithm trading system which predicts well and can win the stock price trading, theare are three potential approch.
-- Change my data: Feature engineering with the existing models.
-- Change my model and data: CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is correspoding to Google, Apple, Facebook, and Amazon stock datasets.
-- Change my model: In order to 'win' trading, Deep-Reinforcement approach is usefull because it can learn policy with three actions of sell, stay, buy.
+- **Change my preprocessing**:  
+Feature engineering with the existing models.  
 
-I appreciate your spending time on my papaer.  
-Sincerely,  
+- **Change my model and data**:  
+CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is correspoding to Google, Apple, Facebook, and Amazon stock datasets.  
+
+- **Change my model**:  
+In order to 'win' trading, Deep-Reinforcement approach is usefull because it can learn policy with three actions of sell, stay, buy.
+
+**EoF**  
+I appreciate your time.  
+*Thanks and Best Regards, *   
+
 [Masaharu Kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/), a newly-fladged data scientist at IBM Japan
