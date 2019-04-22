@@ -6,7 +6,7 @@ LinkedIn: [masaharu kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/) 
 Apr, 2019  
 
 ### Abstract
-In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle. As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. In order to show that, CNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.
+In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle. As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. In order to show that RNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.
 
 ### Agenda
 1. Domain background
@@ -56,7 +56,7 @@ In this section, a solution to the problem is described. Roughly speaking, a sol
 First of all, train and test datasets are split into small datasets according to window length and normalized within window.  
 Next, train dataset is split into train and validation datasets. The validation dataset is used for decide hyper-parametes, such as number of epochs and layers etc. in order to avoid information leak from test dataset. By doing so, generalization performance of build deep learning models can be evaluated.  
 ** Modeling **  
-After the above preprocessing, RNN, CNN, LSTM, CNN+LSTM models are build on the preprocessed train datasets with target of Close price. After each model is trained, it is tested on the test dataset with MSE.
+After the above preprocessing, RNN, LSTM, CNN+LSTM models are build on the preprocessed train datasets with target of Close price. After each model is trained, it is tested on the test dataset with MSE.
 
 ### Benchmark Model
 In this problem, RNN model is build to get base MSE as benchmark model. RNN, one of the famous deep learning models, is often used for time-series forecasting. This is an usual score with conventional method employing deep learning. As mentioned above, the metrics with which the benchmark model is measured is also MSE.
@@ -68,7 +68,7 @@ Second, more penalty is added to larger error with MSE compared to MAE by employ
 Therefore, MSE is employed as evaluation metrics.
 
 ### Project Design
-In this final section, a workflow for approaching a solution is summarized. In order to verify the useful of CNN in the stock price prediction problem, the 4 models of RNN, CNN, LSTM, and CNN+LSTM are build on the train and test dataset with metrics MSE. Google stock datasets on [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs) are used. RNN, a benchmark model, and the other models are build on the train datasets from 2014-03-27 to 2017-05-01. After training, their MSE score on the test dataset, from 2017-05-01 to 2017-11-10, are compared with the others.  
+In this final section, a workflow for approaching a solution is summarized. In order to verify the useful of CNN in the stock price prediction problem, the 3 models of RNN, LSTM, and CNN+LSTM are build on the train and test dataset with metrics MSE. Google stock datasets on [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs) are used. RNN, a benchmark model, and the other models are build on the train datasets from 2014-03-27 to 2017-05-01. After training, their MSE score on the test dataset, from 2017-05-01 to 2017-11-10, are compared with the others.  
 By doing so, how useful CNN is to time-series forecasting are verified.
 
 ### EoF  

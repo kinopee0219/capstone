@@ -68,7 +68,7 @@ Second, more penalty is added to larger error with MSE compared to MAE by employ
 Therefore, MSE is employed as evaluation metrics.
 
 ### Project Design
-In this final section, a workflow for approaching a solution is summarized. In order to verify the useful of CNN in the stock price prediction problem, the 4 models of RNN, LSTM, and CNN+LSTM are build on the train and test dataset with metrics MSE. Google stock datasets on [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs) are used. RNN, a benchmark model, and the other models are build on the train datasets from 2014-03-27 to 2017-05-01. After training, their MSE score on the test dataset, from 2017-05-01 to 2017-11-10, are compared with the others.  
+In this final section, a workflow for approaching a solution is summarized. In order to verify the useful of CNN in the stock price prediction problem, the 3 models of RNN, LSTM, and CNN+LSTM are build on the train and test dataset with metrics MSE. Google stock datasets on [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs) are used. RNN, a benchmark model, and the other models are build on the train datasets from 2014-03-27 to 2017-05-01. After training, their MSE score on the test dataset, from 2017-05-01 to 2017-11-10, are compared with the others.  
 By doing so, how useful CNN is to time-series forecasting are verified.
 
 ### EoF  
