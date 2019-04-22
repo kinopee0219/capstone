@@ -352,16 +352,16 @@ The first step in our LSTM is to decide what information we’re going to throw 
 
 <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png" width=50%>   
 
-The next step is to decide what new information we’re going to store in the cell state. This has two parts. First, a sigmoid layer called the **“input gate layer”** decides which values we’ll update. The input gate layer take necessary infromation into the memory-cell to keep during leanring.  
+The next step is to decide what new information we’re going to store in the cell state. This has two parts. First, a sigmoid layer called the **“input gate layer”** decides which values we’ll update. The input gate layer take necessary informations into the memory-cell to keep during learning.  
 <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png" width=50%>   
 
-Finally, we need to decide what we’re going to output. This output will be based on our cell state, but will be a filtered version. First, we run a sigmoid layer which decides what parts of the cell state we’re going to output. Then, we put the cell state through tanh (to push the values to be between −1 and 1) and multiply it by **"the output of the sigmoid gate"**, so that we only output the parts we decided to.
+Finally, we need to decide what we’re going to output. This output will be based on our cell state, but will be a filtered version. First, we run a sigmoid layer which decides what parts of the cell state we’re going to output. Then, we put the cell state through tanh (to push the values to be between −1 and 1) and multiply it by **"the output of the sigmoid gate"**, so that we only output the parts we decided to.  
 <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-o.png" width=50%>   
 
 #### 2-4. Benchmark
 In this problem, RNN model is build to get base MSE as benchmark model. RNN, one of the famous deep learning models, is often used for time-series forecasting. This is an usual score with conventional method employing deep learning. As mentioned above, the metrics with which the benchmark model is measured is also MSE.
 
-As described more in the next section 'Methodology', the benchmark MSE socre obtained by RNN with 7 layers composed of 6 simple-RNNs and 1 Dense layer is **0.00171**. This value is the benchmark MSE score. As you may know, the smaller, the better.
+As described more in the next section 'Methodology', the benchmark MSE score obtained by RNN with 7 layers composed of 6 simple-RNNs and 1 Dense layer is **0.00171**. This value is the benchmark MSE score. As you may know, the smaller, the better.
 
 ---
 <div style="page-break-before:always"></div>  
@@ -370,11 +370,11 @@ As described more in the next section 'Methodology', the benchmark MSE socre obt
 #### 3-1. Data Preprocessing
 In this section, preprocessing approaches, hold-out and normalization, are explained.
 
-In this problem, the original datasets are split into train and test datasets so that deep learning models can aquire generalized performance.  
+In this problem, the original datasets are split into train and test datasets so that deep learning models can acquire generalized performance.  
 
 This technique is known as **hold-out**. The usual test datasets ratio may be 20%, however, in this case, test datasets ratio is 15% because given datasets are not so enough that deep learning model learn from that.
 
-As for **normalization**, it is conducted within window datasets. More concretely speaking, window datasets values are devided by the value of its first index, 0. After do that, the values devided are minus 1 in order to set the value range from -1.0 to 1.0. This noramlization allows my deep learning models to learn more first and get properly regularization term effect. Actually, in this paper, no regularization approch are employed because this don't meet my goal which is to verify CNN potential for time-series forecasting.  In this time, 10 is employed for the window length.
+As for **normalization**, it is conducted within window datasets. More concretely speaking, window datasets values are devided by the value of its first index, 0. After do that, the values are minus 1 in order to set the value range from -1.0 to 1.0. This normalization allows my deep learning models to learn more first and get properly regularization term effect. Actually, in this paper, no regularization approach are employed because this don't meet my goal which is to verify CNN potential for time-series forecasting.  In this time, 10 is employed for the window length.
 
 
 ```python
@@ -416,7 +416,7 @@ The process for which metrics, algorithms, and techniques were implemented with 
 
 As for **metics**, MSE are employed in order to give more penalty on larger error compared to MAE because it employs squared value.
 
-As for **deep learning models**, models performing well on a time-series problem are selected. As mentioned above, RNN is employed as benchmark model. It has been widely used for time-series prediction problem so far. According the convention, RNN is selected and RNN network with 7 layers composed of 6 RNN layers and 1 Dence is epmployed as the benchmark model and trained on those datasets with 'adam' optimizer.  
+As for **deep learning models**, models performing well on a time-series problem are selected. As mentioned above, RNN is employed as benchmark model. It has been widely used for time-series prediction problem so far. According the convention, RNN is selected and RNN network with 7 layers composed of 6 RNN layers and 1 Dence is employed as the benchmark model and trained on those datasets with 'adam' optimizer.  
 
 As for **optimizer**, **['adam'](https://arxiv.org/pdf/1412.6980.pdf)** is used in this paper.  
 Adam is a popular algorithm in the field of deep learning because it achieves good results fast.In the original paper, Adam was demonstrated empirically to show that convergence meets the expectations of the theoretical analysis. Adam was applied to the logistic regression algorithm on the MNIST character recognition and IMDB sentiment analysis datasets, a Multilayer Perceptron algorithm on the MNIST dataset and Convolutional Neural Networks on the CIFAR-10 image recognition dataset.   
@@ -429,12 +429,12 @@ How does adam work? Adam is different from classical stochastic gradient descent
 Instead of adapting the parameter learning rates based on the average first moment (the mean) as in RMSProp, Adam also makes use of the average of the second moments of the gradients (the uncentered variance).
 Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters beta1 and beta2 control the decay rates of these moving averages.
 
-All of the deep learning models used in this paper are trained with adam otimizer. However, RNN model reaches the limit at about 0.0017 MSE on the test datasets although layers are stacked and increase number of epoch. As it is shown in the learning curve, RNN's curve reach the limit.  
+All of the deep learning models used in this paper are trained with adam optimizer. However, RNN model reaches the limit at about 0.0017 MSE on the test datasets although layers are stacked and increase number of epoch. As it is shown in the learning curve, RNN's curve reach the limit.  
 
 #### 3-3. Refinement
-So, LSTM which has capability to learn logn-term dependencies are employed as second deep leanring model. LSTM model is composed of 7layers which are 6 layers LSTM and 1 Dense layer as the same as RNN.  
+So, LSTM which has capability to learn long-term dependencies are employed as second deep learning model. LSTM model is composed of 7layers which are 6 layers LSTM and 1 Dense layer as the same as RNN.  
 
-After trainig, LSTM performs better on the test datasets than RNN and it achieves 0.00024 MSE in comparision with 0.017, benchmark score of RNN.  
+After training, LSTM performs better on the test datasets than RNN and it achieves 0.00024 MSE in comparision with 0.017, benchmark score of RNN.  
 LSTM, however, takes long time to learn from the datasets because LSTM learn sequentially. Now, it takes about 196 sec. In the real business, time is also important in addition to prediction ability.  
 
 Lastly, 1-dimentional-CNN+LSTM is employed as the third deep learning model to predict as well as LSTM model and save learning time. As the same as the above two kinds of deep learning models, 1d-CNN+LSTM model is composed of 7 layers with 2 CNN layers, 4 LSTM layers and 1 Dense layers. After 1d-CNN+LSTM is trained, it is confirmed that its loss, MSE, is 0.00024 which is the same as the LSTM model and the training time  is 134 sec which is shorter by 32 % than LSTM which takes 196 sec to learn from training datasets.  
@@ -745,12 +745,12 @@ for key, hist_value in history_dict.items():
 #### 4-1. Model Evaluation and Validation
 In this section, the final model's qualities such as its robustness are evaluated.  
 
-As shown in the above learning curves, the three models has generalized perfomance because they perform well on both train and test datasets in terms of MSE, which is metrics.  
+As shown in the above learning curves, the three models has generalized performance because they perform well on both train and test datasets in terms of MSE, which is metrics.  
 
-In addition to this, the parameter's value of each model is respectively visualized in the below distribution plots. The distribution graphs show that parametes value of network distribute from -0.5 to 0.5 although bias values distribute mostly aroung 0. This means that the deep learning models are a little bit redundancy network to solve this problem.
+In addition to this, the parameter's value of each model is respectively visualized in the below distribution plots. The distribution graphs show that parameters value of network distribute from -0.5 to 0.5 although bias values distribute mostly around 0. This means that the deep learning models are a little bit redundancy network to solve this problem.
 
 #### 4-2. Justification
-In this sectioin, the final results are compared to the benchmark result and justification is made as to whether the final model and solution is significant enough to have adequately solved the problem.  
+In this section, the final results are compared to the benchmark result and justification is made as to whether the final model and solution is significant enough to have adequately solved the problem.  
 
 MSEs of both LSTM and CNN+LSTM are smaller by approximately 86% on the given train and test datasets than the benchmark score, which is RNN's MSE.  
 In terms of learning speed, CNN+LSTM are shortest than RNN and LSTM.  
@@ -906,15 +906,17 @@ Anyway, this experience to employing various deep learning models to solve this 
 #### 5-3. Improvement
 In this section, discussion is made as to how one aspect of the implementation could be improved.
 
-In order to build algorithm trading system which predicts well and can win the stock price trading, theare are three potential approch.
+In order to build algorithm trading system which predicts well and can win the stock price trading, there are three potential approach.
 - **Change my preprocessing**:  
 Feature engineering with the existing models.  
 
 - **Change my model and data**:  
-CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is correspoding to Google, Apple, Facebook, and Amazon stock datasets.  
+CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is corresponding to Google, Apple, Facebook, and Amazon stock datasets.  
 
 - **Change my model**:  
-In order to 'win' trading, Deep-Reinforcement approach is usefull because it can learn policy with three actions of sell, stay, buy.
+1. In order for existing models to train and predict first, there are some room to thin out the connections between deep neural networks because the parameters distributions are around 0 as it is visualized the above at the section of #4-1. Model Evaluation and Validation.   
+
+2. In order to 'win' trading, Deep-Reinforcement approach is useful because it can learn policy with three actions of sell, stay, buy.
 
 **EoF**  
 I appreciate your time.  
