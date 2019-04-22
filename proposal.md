@@ -2,11 +2,11 @@
 ## Capstone Proposal
 Masaharu KINOSHITA  
 e-mail: <k.masaharu0219@gmail.com>  
-LinkedIn: [masaharu kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/) *prefer  
+LinkedIn: [Masaharu KINOSHITA](https://www.linkedin.com/in/masaharu-kinoshita/) *prefer  
 Apr, 2019  
 
 ### Abstract
-In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle. As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. In order to show that RNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.
+In this proposal, in order to verify how useful CNN is to solve time-series prediction problem, RNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs). As you know, CNN is mainly used in the field of Image Recognition so far. CNN, however, has recently been said to be a valid method to solve time-series forecasting problem. In order to show that RNN, LSTM, and CNN+LSTM models are build on the google stock datasets and their score on the test datasets are compared with benchmark score of RNN, which is often used for time-series data, with MSE.
 
 ### Agenda
 1. Domain background
@@ -54,7 +54,7 @@ The original datasets are provided at [kaggle](https://www.kaggle.com/borismarja
 In this section, a solution to the problem is described. Roughly speaking, a solution consists of two part.  
 ** Preprocessing **  
 First of all, train and test datasets are split into small datasets according to window length and normalized within window.  
-Next, train dataset is split into train and validation datasets. The validation dataset is used for decide hyper-parametes, such as number of epochs and layers etc. in order to avoid information leak from test dataset. By doing so, generalization performance of build deep learning models can be evaluated.  
+Next, train dataset is split into train and validation datasets. The validation dataset is used for decide hyper-parameters, such as number of epochs and layers etc. in order to avoid information leak from test dataset. By doing so, generalization performance of build deep learning models can be evaluated.  
 ** Modeling **  
 After the above preprocessing, RNN, LSTM, CNN+LSTM models are build on the preprocessed train datasets with target of Close price. After each model is trained, it is tested on the test dataset with MSE.
 
