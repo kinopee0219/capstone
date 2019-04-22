@@ -921,5 +921,5 @@ CNN and LSTM with one more dimension to learn the relationship between the other
 I appreciate your time.  
 *Thanks and Best Regards, *   
 
-[Masaharu Kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/), a newly-fladged data scientist at IBM Japan
+[Masaharu Kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/), a newly-fladged data scientist at IBM Japan  
 **EoF**  
