@@ -825,7 +825,7 @@ plt.show()
 #### 5-1. Free-Form Visualization
 In this section, a visualization has been provided that emphasizes an important quality about the project with thorough discussion.  
 
-In this paper, in order to verify how useful CNN is to solve time-series prediction problem, CNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle and their predictions are compared with MSE. As a result, CNN+LSTM and LSTM's MSE are minimum adn CNN+LSTM's learning time is shortest amongst the three models. This shows that applying CNN to time-series forecasting is valid.  
+In this paper, in order to verify how useful CNN is to solve time-series prediction problem, RNN, LSTM, and CNN+LSTM are build on stock datasets of Google obtained at kaggle and their predictions are compared with MSE. As a result, CNN+LSTM and LSTM's MSE are minimum and CNN+LSTM's learning time is shortest amongst the three models. This shows that applying CNN to time-series forecasting is valid.  
 
 Predictions by each deep learning models are visualized below. As shown below and mentioned above, LSTM and CNN+LSTM performs much better than benchmark model, RNN. In contrast to RNN as benchmark model which has less robustness, LSTM and CNN+LSTM look to have more robustness and predict better.   
 
@@ -918,8 +918,8 @@ CNN and LSTM with one more dimension to learn the relationship between the other
 
 2. In order to 'win' trading, Deep-Reinforcement approach is useful because it can learn policy with three actions of sell, stay, buy.
 
-**EoF**  
 I appreciate your time.  
 *Thanks and Best Regards, *   
 
 [Masaharu Kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/), a newly-fladged data scientist at IBM Japan
+**EoF**  
