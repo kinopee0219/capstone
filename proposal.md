@@ -28,7 +28,7 @@ My motivation to tackle with this proposal is to acquire skills and tacit knowle
 ### 2. Problem Statement
 In this proposal, usability of deep learning, especially CNN as an feature extractor, is verified. Although CNN is known to be valid in the field of Image Recognition, few use-case of CNN are applied to finance problem, such as stock price predictions. This is because a lot of Algorithm Trading has employed technical index so far. These index, however, are commonly used and developed by humans. So, it can be said that there is some room to improve Trading Algorithm.  
 In this context, applying CNN to the finance problem and validation of its usefulness is meaningful as CNN has high potential to recognize patterns in given dataset and computational power has advanced so far.  
-In order to valid the usefulness of CNN, LSTM and CNN+LSTM are compared to the stock price predictions with metrics MSE. In addition to this, RNN is set as base-models. By comparing the four models with MSE, the usefulness of CNN are verified in the stock price problem.
+In order to valid the usefulness of CNN, LSTM and CNN+LSTM are compared to the stock price predictions with metrics MSE. In addition to this, RNN is set as base-models. By comparing the LSTM and CNN+LSTM models with RNN's MSE, the usefulness of CNN are verified in the stock price problem.
 
 ### Datasets and Inputs
 In this proposal, deep learning models are trained and tested on the stock of Google. The datasets contains the following two csv files.  
