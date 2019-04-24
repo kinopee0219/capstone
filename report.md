@@ -902,10 +902,10 @@ CNN and LSTM with one more dimension to learn the relationship between the other
 - **Change my model**:  
 1. In order for existing models to train and predict first, there are some room to thin out the connections between deep neural networks because the parameters distributions are around 0 as it is visualized the above at the section of #4-1. Model Evaluation and Validation.   
 
-2. In order to 'win' trading, Deep-Reinforcement approach is useful because it can learn policy with three actions of sell, stay, buy.
+2. In order to 'win' trading, Deep-Reinforcement approach is useful because it can learn policy that this new model follows to decide three actions of sell, stay, and buy depending on the state.
 
 I appreciate your time.   
 
 [Masaharu Kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/), a newly-fladged data scientist at IBM Japan  
-*Thanks and Best Regards, *    
+Thanks and Best Regards,   
 **EoF**  
