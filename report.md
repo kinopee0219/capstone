@@ -32,6 +32,7 @@ Therefore, MSE is employed as evaluation metrics.
   '<img src='./img/mse.png' width=30% />   
 </div>
 
+
 ---
 <div style="page-break-before:always"></div>  
 
@@ -298,9 +299,7 @@ plt.savefig('./img/'+'close_price_plot.png')
 plt.show()
 ```
 
-<div style="text-align:center">
-  ![png](./img/output_8_0.png)
-</div>
+![png](./img/output_8_0.png)
 
 #### 2-3. Algorithms and Techniques
 In this paper, deep learning models performing well for time-series predictions, [RNN, LSTM](http://colah.github.io/posts/2015-08-Understanding-LSTMs/), CNN+LSTM, are used because the Close Price are relevant with the past stock information, which is our input data such as Open, High, Low, Volume columns. By applying RNN, LSTM, CNN+LSTM models to this time-series forecasting problem, how useful CNN is to solve time-series prediction problem is verified.
