@@ -1,6 +1,5 @@
 
-### Capstone Project:
-### Google Stock Price Prediction with Deep Learning Models
+### Capstone Project: Google Stock Price Prediction with Deep Learning Models
 Masaharu KINOSHITA  
 e-mail: <k.masaharu0219@gmail.com>  
 LinkedIn: [Masaharu KINOSHITA](https://www.linkedin.com/in/masaharu-kinoshita/) *I prefer linkedin for communication with you.  
@@ -9,8 +8,8 @@ Apr, 2019
 ### <u>Agenda</u>
 **#1. Definition** ------- How do I establish this Problem?  
 **#2. Analysis** -------- How do I define problem solving and design my approach?  
-**#3. Methodology** -- How do I conduct this approach in terms of data science?  
-**#4. Results** -------- What do my approach result in?  
+**#3. Methodology** --- How do I conduct this approach in terms of data science?  
+**#4. Results** --------- What do my approach result in?  
 **#5. Conclusions**
 
 ---

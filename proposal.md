@@ -1,4 +1,4 @@
-## Capstone Proposal
+## Capstone Proposal: Google Stock Price Prediction with Deep Learning Models
 Masaharu KINOSHITA  
 e-mail: <k.masaharu0219@gmail.com>  
 LinkedIn: [Masaharu KINOSHITA](https://www.linkedin.com/in/masaharu-kinoshita/) *prefer  
