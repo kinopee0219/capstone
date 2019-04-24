@@ -70,8 +70,9 @@ Therefore, MSE is employed as evaluation metrics.
 In this final section, a workflow for approaching a solution is summarized. In order to verify the useful of CNN in the stock price prediction problem, the 3 models of RNN, LSTM, and CNN+LSTM are build on the train and test dataset with metrics MSE. Google stock datasets on [kaggle](https://www.kaggle.com/borismarjanovic/price-volume-data-for-all-us-stocks-etfs) are used. RNN, a benchmark model, and the other models are build on the train datasets from 2014-03-27 to 2017-05-01. After training, their MSE score on the test dataset, from 2017-05-01 to 2017-11-10, are compared with the others.  
 By doing so, how useful CNN is to time-series forecasting are verified.
 
-### EoF  
+
 Thanks for your reading. If you are interested in me, please feel free to txt me. I prefer LinkedIn to e-mail communication.
 e-mail: <k.masaharu0219@gmail.com>  
 LinkedIn: [masaharu kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/)  
-Sincerely,
+Sincerely,  
+### EoF
