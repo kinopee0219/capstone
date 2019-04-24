@@ -29,7 +29,9 @@ First, the target value, which is daily close stock price, is continuous. So, th
 Second, more penalty is added to larger error with MSE compared to MAE by employing squared value.  
 Therefore, MSE is employed as evaluation metrics.  
 
-<img src='./img/mse.png' width=20%>   
+<div style="text-align:center">
+  '<img src='./img/mse.png' width=30% />   
+</div>
 
 ---
 <div style="page-break-before:always"></div>  
@@ -131,19 +133,6 @@ print(X_train.describe())
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -214,19 +203,6 @@ print(X_train.describe())
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -323,9 +299,9 @@ plt.savefig('./img/'+'close_price_plot.png')
 plt.show()
 ```
 
-
-![png](./img/output_8_0.png)
-
+<div style="text-align:center">
+  ![png](./img/output_8_0.png)
+</div>
 
 #### 2-3. Algorithms and Techniques
 In this paper, deep learning models performing well for time-series predictions, [RNN, LSTM](http://colah.github.io/posts/2015-08-Understanding-LSTMs/), CNN+LSTM, are used because the Close Price are relevant with the past stock information, which is our input data such as Open, High, Low, Volume columns. By applying RNN, LSTM, CNN+LSTM models to this time-series forecasting problem, how useful CNN is to solve time-series prediction problem is verified.
@@ -333,29 +309,42 @@ In this paper, deep learning models performing well for time-series predictions,
 **# What is RNN?**  
 One of the appeals of RNNs is the idea that they might be able to connect previous information to the present task, such as using previous video frames might inform the understanding of the present frame. RNNs can learn to use the past information with the following repeating module. Unfortunately, **as that gap grows, RNNs become unable to learn to connect the information**.  
 
-<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-SimpleRNN.png" width=50%>  
-
+<div style="text-align:center">
+  <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-SimpleRNN.png" width=50%>  
+</div>
 
 **# What is LSTM?**  
 Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. They were introduced by Hochreiter & Schmidhuber (1997), and were refined and popularized by many people in following work.  
 
 LSTMs are explicitly designed to avoid the long-term dependency problem. Remembering information for long periods of time is practically their default behavior, not something they struggle to learn! LSTMs also have this chain like structure, but the repeating module has a different structure. Instead of having a single neural network layer, there are four, interacting in a very special way.  
-<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png" width=50%>  
+<div style="text-align:center">
+  <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png" width=50%>  
+</div>
 
 The key to LSTMs is the memory-cell, the horizontal line running through the top of the diagram.
 The cell state is kind of like a conveyor belt. It runs straight down the entire chain, with only some minor linear interactions. It’s very easy for information to just flow along it unchanged. This concept realizes Long Short-term Memory.  
 
-<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-C-line.png" width=50%>  
+<div style="text-align:center">
+  <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-C-line.png" width=50%>  
+</div>
 
 The first step in our LSTM is to decide what information we’re going to throw away from the cell state. This decision is made by a sigmoid layer called the **“forget gate layer.”** This gate get rid of unnecessary information from the memory-cell.  
 
-<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png" width=50%>   
+<div style="text-align:center">
+  <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png" width=50%>   
+</div>
 
 The next step is to decide what new information we’re going to store in the cell state. This has two parts. First, a sigmoid layer called the **“input gate layer”** decides which values we’ll update. The input gate layer take necessary informations into the memory-cell to keep during learning.  
-<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png" width=50%>   
+
+<div style="text-align:center">
+  <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png" width=50%>   
+</div>
 
 Finally, we need to decide what we’re going to output. This output will be based on our cell state, but will be a filtered version. First, we run a sigmoid layer which decides what parts of the cell state we’re going to output. Then, we put the cell state through tanh (to push the values to be between −1 and 1) and multiply it by **"the output of the sigmoid gate"**, so that we only output the parts we decided to.  
-<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-o.png" width=50%>   
+
+<div style="text-align:center">
+  <img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-o.png" width=50%>   
+</div>
 
 #### 2-4. Benchmark
 In this problem, RNN model is build to get base MSE as benchmark model. RNN, one of the famous deep learning models, is often used for time-series forecasting. This is an usual score with conventional method employing deep learning. As mentioned above, the metrics with which the benchmark model is measured is also MSE.
@@ -422,13 +411,11 @@ Adam is a popular algorithm in the field of deep learning because it achieves go
 
 How does adam work? Adam is different from classical stochastic gradient descent. SGD maintains a single learning rate (termed alpha) for all weight updates and the learning rate does not change during training. In contrast to this, adam realizes the benefits of both AdaGrad and RMSProp.
 - **Adaptive Gradient Algorithm (AdaGrad)** that maintains a per-parameter learning rate that improves performance on problems with sparse gradients (e.g. natural language and computer vision problems).  
-- **Root Mean Square Propagation (RMSProp)** that also maintains per-parameter learning rates that are adapted based on the average of recent magnitudes of the gradients for the weight (e.g. how quickly it is changing). This means the algorithm does well on online and non-stationary problems (e.g. noisy).
-
-
+- **Root Mean Square Propagation (RMSProp)** that also maintains per-parameter learning rates that are adapted based on the average of recent magnitudes of the gradients for the weight (e.g. how quickly it is changing). This means the algorithm does well on online and non-stationary problems (e.g. noisy).  
 Instead of adapting the parameter learning rates based on the average first moment (the mean) as in RMSProp, Adam also makes use of the average of the second moments of the gradients (the uncentered variance).
 Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters beta1 and beta2 control the decay rates of these moving averages.
 
-All of the deep learning models used in this paper are trained with adam optimizer. However, RNN model reaches the limit at about 0.0017 MSE on the test datasets although layers are stacked and increase number of epoch. As it is shown in the learning curve, RNN's curve reach the limit.  
+In this analysis, all of the deep learning models used in this paper are trained with adam optimizer. However, RNN model reaches the limit at about 0.0017 MSE on the test datasets although layers are stacked and increase number of epoch. As it is shown in the learning curve, RNN's curve reach the limit.  
 
 #### 3-3. Refinement
 So, LSTM which has capability to learn long-term dependencies are employed as second deep learning model. LSTM model is composed of 7layers which are 6 layers LSTM and 1 Dense layer as the same as RNN.  
@@ -910,15 +897,15 @@ In order to build algorithm trading system which predicts well and can win the s
 Feature engineering with the existing models.  
 
 - **Change my model and data**:  
-CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is corresponding to Google, Apple, Facebook, and Amazon stock datasets.  
+CNN and LSTM with one more dimension to learn the relationship between the other stock datasets such as Facebook, Apple etc. For simple example, CNN's RGB channel for image recognition is corresponding to Google, Apple, Facebook, and Amazon stock datasets in this case.  
 
 - **Change my model**:  
 1. In order for existing models to train and predict first, there are some room to thin out the connections between deep neural networks because the parameters distributions are around 0 as it is visualized the above at the section of #4-1. Model Evaluation and Validation.   
 
 2. In order to 'win' trading, Deep-Reinforcement approach is useful because it can learn policy with three actions of sell, stay, buy.
 
-I appreciate your time.  
-*Thanks and Best Regards, *   
+I appreciate your time.   
 
 [Masaharu Kinoshita](https://www.linkedin.com/in/masaharu-kinoshita/), a newly-fladged data scientist at IBM Japan  
+*Thanks and Best Regards, *    
 **EoF**  
